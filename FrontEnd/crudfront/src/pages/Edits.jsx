@@ -1,89 +1,77 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { toast } from 'react-toastify';
-import { Link, useNavigate } from 'react-router-dom';
-
-const initialState = {
+import react, { useState } from "react";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { Link ,useHistory  } from "react-router-dom";
+const intialstate = {
     fname: "",
     lname: "",
     city: "",
 };
-
 const Edit = () => {
-    const [state, setState] = useState(initialState);
-    const { fname, lname, city } = state;
-    const navigate = useNavigate(); // Use useNavigate for navigation
-
-    const handleSubmit = async (e) => {
+    const [state, setState] = useState(intialstate);
+    const { fname, lname, city } = state
+const history=useHistory();
+    const handleSubmit = (e) => {
         e.preventDefault();
-        if (!fname || !lname || !city) {
-            toast.error("Please insert all values.");
-        } else {
-            try {
-                await axios.post("http://localhost:5000/api/post", { fname, lname, city });
-                setState(initialState); // Clear state after submission
-                toast.success("Data saved successfully!");
-                setTimeout(() => navigate("/"), 500); // Redirect after 500ms
-            } catch (err) {
-                toast.error(err.response?.data || "An error occurred."); // Improved error handling
-            }
+        if(!fname || !lname || !city){
+            toast.error("insert value ...")
         }
-    };
+        else{
+            axios.post("http://localhost:5000/api/post",{
+            
+                fname,
+                lname,
+                city,
+            }).then(()=>{
+                setState({fname:"", lname:"",city:""});
+            }).catch((err)=>toast.error(err.response.data));
+                setTimeout(() => history.push("/"), 500);
+        }
+    }
 
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setState({ ...state, [name]: value });
-    };
-
+    const handleInputchange = (e) => {
+        const { fname, value } = e.target;
+        setState({ ...state, [fname]: value });
+    }
     return (
-        <div>
-            <h1>Edit And Add</h1>
+        <>
 
-            <form
-                style={{
-                    margin: "auto",
-                    padding: "15px",
-                    maxWidth: "400px",
-                    alignContent: "center"
-                }}
-                onSubmit={handleSubmit}
-            >
-                <label htmlFor="fname">First name</label>
-                <input
-                    type="text"
-                    id="fname"
-                    name="fname" // Corrected to match state property
-                    placeholder="Enter your first name..."
-                    value={fname}
-                    onChange={handleInputChange}
-                /> <br />
+            <div>
+                <h1>Edit And Add</h1>
 
-                <label htmlFor="lname">Last name</label>
-                <input
-                    type="text"
-                    id="lname"
-                    name="lname"
-                    placeholder="Enter your surname..."
-                    value={lname}
-                    onChange={handleInputChange}
-                /> <br />
 
-                <label htmlFor="city">City</label>
-                <input
-                    type="text"
-                    id="city"
-                    name="city"
-                    placeholder="Enter your city..."
-                    value={city}
-                    onChange={handleInputChange}
-                /> <br />
+                <form action=""
+                    style={{
+                        margin: "auto",
+                        padding: "15px",
+                        maxWidth: "400px",
+                        alignContent: "center"
+                    }}
 
-                <input type="submit" value="Save" /> <br />
-                <Link to="/">
-                    <button type="button">Go Back</button> {/* Changed to button */}
-                </Link>
-            </form>
-        </div>
+                    onSubmit={handleSubmit}
+
+                >
+
+                    <label htmlFor="fname">First name</label>
+                    <input type="text" id="fname" name="dname" placeholder="enter your first name ..." value={fname}
+                        onChange={handleInputchange} /> <br />
+
+                    <label htmlFor="lname">Last name</label>
+                    <input type="text" id="lname" name="lname" placeholder="enter your surname ..." value={lname}
+                        onChange={handleInputchange} /> <br />
+
+                    <label htmlFor="city">city</label>
+                    <input type="text" id="city" name="city" placeholder="enter your city ..." value={city}
+                        onChange={handleInputchange} /> <br />
+
+                    <input type="button" value="save" /> <br />
+                    <Link to="/">
+                        <input type="button" value="Go Back" />
+                    </Link>
+                </form>
+
+            </div>
+        </>
     );
 };
 

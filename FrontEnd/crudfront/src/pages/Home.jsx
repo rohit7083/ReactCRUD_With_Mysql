@@ -1,31 +1,31 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-
+import { toast } from 'react-toastify';
 const Home = () => {
     const [data, setData] = useState([]);
 
     const loaddata = async () => {
-        try {
-            const response = await axios.get('http://localhost:5000/api/get');
+        // try {
+            const response = await axios.get("http://localhost:5000/api/get");
             setData(response.data); // Update state with the fetched data
-        } catch (error) {
-            console.error('Error fetching data:', error); // Error handling
-        }
+        // } catch (error) {
+        //     console.error('Error fetching data:', error); // Error handling
+        // }
     };
 
     useEffect(() => {
         loaddata();
-    }, []); // Dependency array to ensure it only runs once
+    }, []); 
 
     return (
         <div>
             <h2>This is the Home page</h2>
             <Link to="/addcontact">
-                                    <button className="btn btn-edit">
-                                        Add
-                                    </button>
-                                </Link>
+                <button className="btn btn-edit">
+                    Add
+                </button>
+            </Link>
             <table className="styled-table">
                 <thead>
                     <tr>

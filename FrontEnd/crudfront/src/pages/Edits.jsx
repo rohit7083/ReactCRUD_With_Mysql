@@ -10,7 +10,7 @@ const intialstate = {
 const Edit = () => {
     const [state, setState] = useState(intialstate);
     const { fname, lname, city } = state
-    const navigate = useNavigate(); // Replace useHistory with useNavigate
+    const navigate = useNavigate();
     const { id } = useParams();
 
     useEffect(() => {
@@ -20,9 +20,6 @@ const Edit = () => {
 
     }, [id]);
 
-
-
-
     const handleSubmit = (e) => {
         e.preventDefault();
         if (!fname || !lname || !city) {
@@ -31,7 +28,7 @@ const Edit = () => {
         else {
             if (!id) {
                 axios.
-                    post("http://localhost:5000/api/post", {
+                    post('http://localhost:5000/api/post', {
                         fname,
                         lname,
                         city,
@@ -50,9 +47,7 @@ const Edit = () => {
                     }).catch((err) => toast.error(err.response.data));
                 toast.success("contact update succesfully...");
             }
-
             setTimeout(() => navigate("/"), 500);
-
         }
     }
 
@@ -68,12 +63,12 @@ const Edit = () => {
 
 
                 <form action=""
-                    style={{
-                        // margin: "auto",
-                        // padding: "15px",
-                        // maxWidth: "400px",
-                        // alignContent: "center"
-                    }}
+                    // style={{
+                    //     margin: "auto",
+                    //     padding: "15px",
+                    //     maxWidth: "400px",
+                    //     alignContent: "center"
+                    // }}
 
                     onSubmit={handleSubmit}
 

@@ -76,8 +76,9 @@ app.get("/api/get/:id", (req, res) => {
 app.put("/api/update/:id", (req, res) => {
     const { id } = req.params;
 const {fname,lname,city}=req.body;
-    const sqlUpdate = "UPDATE crudop SET fname=? ,lname=? , city=? where id = ?";
-    db.query(sqlUpdate, [fname,lname,city], (error, result) => {
+    const sqlUpdate = 
+    " UPDATE crudop SET fname=? ,lname=? , city=? where id = ?";
+    db.query(sqlUpdate, [fname,lname,city,id], (error, result) => {
         if (error) {
             console.log(error);
 

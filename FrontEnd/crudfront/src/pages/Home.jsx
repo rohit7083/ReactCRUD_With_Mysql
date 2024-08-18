@@ -39,8 +39,8 @@ const Home = () => {
                 <thead>
                     <tr>
                         <th style={{ textAlign: 'center' }}>No</th>
-                        <th style={{ textAlign: 'center' }}>Fname</th>
-                        <th style={{ textAlign: 'center' }}>Lname</th>
+                        <th style={{ textAlign: 'center' }}>First name</th>
+                        <th style={{ textAlign: 'center' }}>Last name</th>
                         <th style={{ textAlign: 'center' }}>City</th>
                         <th style={{ textAlign: 'center' }}>Action</th>
                     </tr>
